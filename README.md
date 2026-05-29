@@ -1,17 +1,20 @@
-Ստեղծել եմ ավտոմատացված համակարգ (Pipeline), որը ՀՀ պետական ռեգիստրից (e-register.am) քաշում, զտում և դասավորում է բիզնես տվյալները։
+# 📊 Armenian Business Registry Pipeline & Data Extractor
 
-Իրականացրել եմ տվյալների զանգվածային հավաքագրում, որը մշակում է 23,000+ գրառում։
+An automated, high-throughput asynchronous data pipeline engineered to extract, normalize, clean, and structure corporate entity datasets directly from the official Government Registry of the Republic of Armenia (`e-register.am`).
 
-Կառուցել եմ ֆիլտրման ալգորիթմ, որն ավտոմատ հեռացնում է «մեռած» (լուծարված) բիզնեսները՝ թողնելով միայն ակտիվ 13,000-ը։
+---
 
-Ստեղծել եմ սորտավորման մեխանիզմ, որը տվյալները դասավորում է ըստ գրանցման ամսաթվի՝ թարմ տվյալներին առաջնահերթություն տալով։
+## ⚡ Core Architecture & Engineering Impact
 
-Ինչ տեխնոլոգիաներ եմ օգտագործել.
+* **High-Throughput Ingestion Pipeline:** Architected an end-to-end extraction pipeline capable of parsing and processing mass datasets containing over **23,000+ corporate records**.
+* **Deterministic Lifecycle Filtering:** Built a logical data-cleaning layer that automatically detects and strips inactive or liquidated entities, isolating a clean, operational matrix of **13,000+ active businesses**.
+* **Chronological Ingestion Sorting:** Developed a timestamp-sorting mechanism that indexes entities based on their official registration dates, prioritizing the freshest business leads for immediate downstream consumption.
 
-Python (asyncio & httpx) — բարձր արագությամբ, ասինխրոն հարցումներ ուղարկելու և տվյալները վայրկյանների ընթացքում հավաքելու համար։
+---
 
-BeautifulSoup4 — HTML կոդը քանդելու և այնտեղից անհրաժեշտ ինֆորմացիան (անուն, հասցե, կարգավիճակ) մաքուր հանելու համար։
+## 🛠️ Technical Stack & Implementation Details
 
-JSON / JSONL — տվյալները ստրուկտուրավորված պահելու և մեծ ծավալի ֆայլերի հետ էֆեկտիվ աշխատելու համար։
-
-Regular Expressions / Logic Filtering — տվյալների միջից «աղբը» մաքրելու և կարգավիճակները ստուգելու համար։
+* **Asynchronous Networking (`Python 3.12` / `asyncio` + `httpx`):** Implemented non-blocking I/O event loops to orchestrate highly concurrent HTTP requests, slashing total extraction latency and pulling large-scale registry assets within seconds without degrading system performance.
+* **Semantic HTML Parsing (`BeautifulSoup4`):** Engineered robust DOM selectors to deconstruct complex raw HTML payloads, reliably extracting specific data points such as Legal Entity Names, Operational Addresses, and Incorporation Statuses.
+* **Storage Optimization (`JSON` / `JSONL`):** Streamlined storage throughput by writing datasets into structured JSON Lines (`.jsonl`) format, allowing memory-efficient, line-by-line streaming of massive files without loading the entire payload into RAM.
+* **Data Sanitization & Regex Guards (`Regular Expressions`):** Deployed precise tokenization and pattern-matching logic to eliminate raw string anomalies, structural noise, and corrupted records during the transformation stage.
